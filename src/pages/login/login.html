@@ -36,4 +36,17 @@
 
     </ion-list>
   </form>
+
+  <ion-list>
+    <ion-item>
+      <div text-center>
+        <button ion-button icon-start color="primary" (click)='doFacebook()'>
+          <ion-icon name="logo-facebook"></ion-icon>{{ 'FB_LOGIN_BUTTON' | translate }}</button>
+        <button ion-button icon-start color="primary" (click)='doGoogle()'>
+          <ion-icon name="logo-googleplus"></ion-icon>{{ 'GG_LOGIN_BUTTON' | translate }}</button>
+      </div>
+    </ion-item>
+    <ion-item>
+    </ion-item>
+  </ion-list>
 </ion-content>

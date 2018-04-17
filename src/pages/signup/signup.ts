@@ -16,8 +16,8 @@ export class SignupPage {
   // sure to add it to the type
   account: { name: string, email: string, password: string } = {
     name: 'Test Human',
-    email: 'test@example.com',
-    password: 'test'
+    email: 'test1234@example.com',
+    password: 'test1234'
   };
 
   // Our translated text strings
@@ -34,13 +34,12 @@ export class SignupPage {
   }
 
   doSignup() {
-    // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
+    console.log("signup-doSignup()a");
 
-      this.navCtrl.push(MainPage);
-
+    this.user.signupEmail(this.account)
+    .then(() => { 
+      this.navCtrl.push(MainPage); 
+    }, (error) => {
       // Unable to sign up
       let toast = this.toastCtrl.create({
         message: this.signupErrorString,
@@ -48,6 +47,8 @@ export class SignupPage {
         position: 'top'
       });
       toast.present();
-    });
+
+    }
+  )
   }
 }

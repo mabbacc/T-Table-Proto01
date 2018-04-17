@@ -3,6 +3,11 @@ import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
 
 import { Api } from '../api/api';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { firebaseConfig } from '../../config';
+
+import * as firebase from 'firebase/app';
+import AuthProvider = firebase.auth.AuthProvider;
 
 /**
  * Most apps have the concept of a User. This is a simple provider
@@ -27,51 +32,38 @@ import { Api } from '../api/api';
 export class User {
   _user: any;
 
-  constructor(public api: Api) { }
+  constructor(public api: Api,
+      private afAuth: AngularFireAuth) { 
+        afAuth.authState.subscribe(user => {
+          this._user = user;
+        });
+    }
 
   /**
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
-  login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
-
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      } else {
-      }
-    }, err => {
-      console.error('ERROR', err);
-    });
-
-    return seq;
+  loginEmail(accountInfo: any) {
+    console.log('user-loginEmail()a');
+    return this.afAuth.auth.signInWithEmailAndPassword(accountInfo.email, accountInfo.password);
   }
 
   /**
    * Send a POST request to our signup endpoint with the data
    * the user entered on the form.
    */
-  signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
-
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      }
-    }, err => {
-      console.error('ERROR', err);
-    });
-
-    return seq;
+  signupEmail(accountInfo: any) {
+    console.log('user-signupEmail()a');
+    return this.afAuth.auth.createUserWithEmailAndPassword(accountInfo.email, accountInfo.password);
   }
 
   /**
    * Log the user out, which forgets the session
    */
   logout() {
+    // this.menu.close();
+    this.afAuth.auth.signOut();
+
     this._user = null;
   }
 
@@ -80,5 +72,46 @@ export class User {
    */
   _loggedIn(resp) {
     this._user = resp.user;
+  }
+
+
+
+
+  /* Facebook Login */
+  loginFacebook(accountInfo: any) {
+    console.log("user-loginFacebook()a");
+    return this.oauthSignIn(new firebase.auth.FacebookAuthProvider());
+  }
+
+  /* Google Login */
+  loginGoogle(accountInfo: any) {
+    console.log("user-loginGoogle()a");
+    return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
+  }
+
+  oauthSignIn(provider: AuthProvider) {
+    if (!(<any>window).cordova) {
+      return this.afAuth.auth.signInWithPopup(provider);
+    } else {
+      return this.afAuth.auth.signInWithRedirect(provider)
+      .then(() => {
+        return this.afAuth.auth.getRedirectResult().then( result => {
+          let token = result.credential.accessToken;
+          let user = result.user;
+          console.log('oAuth SignIn OK [' + token + ":" + user + "]");
+        }).catch(function(error) {
+          alert(error.message);
+        });
+      });
+    }
+  }
+
+
+
+  updateDisplayName(_displayName: string, _photoURL: string = '') {
+    this.afAuth.auth.currentUser.updateProfile( {
+      displayName: _displayName,
+      photoURL: _photoURL
+    });
   }
 }
