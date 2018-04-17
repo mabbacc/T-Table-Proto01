@@ -1,0 +1,8 @@
+{
+  "name": "T-Table-Proto01",
+  "app_id": "c8be6098",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
