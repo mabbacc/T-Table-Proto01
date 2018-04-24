@@ -1,21 +1,21 @@
 {
-  "BACK_BUTTON_TEXT": "Back",
+  "BACK_BUTTON_TEXT": "뒤로",
 
-  "NAME": "Name",
-  "EMAIL": "Email",
-  "USERNAME": "Username",
-  "PASSWORD": "Password",
-  "LOGIN": "Sign in",
-  "SIGNUP": "Sign up",
+  "NAME": "이름",
+  "EMAIL": "이메일",
+  "USERNAME": "사용자이름",
+  "PASSWORD": "비밀번호",
+  "LOGIN": "로그인",
+  "SIGNUP": "회원 가입",
 
-  "TAB1_TITLE": "Items",
-  "TAB2_TITLE": "Search",
-  "TAB3_TITLE": "Settings",
+  "TAB1_TITLE": "티테이블",
+  "TAB2_TITLE": "검색",
+  "TAB3_TITLE": "설정",
 
-  "MAP_TITLE": "Map",
+  "MAP_TITLE": "지도",
 
-  "TUTORIAL_SKIP_BUTTON": "Skip",
-  "TUTORIAL_CONTINUE_BUTTON": "Continue",
+  "TUTORIAL_SKIP_BUTTON": "건너뛰기",
+  "TUTORIAL_CONTINUE_BUTTON": "계속하기",
 
   "TUTORIAL_SLIDE1_TITLE": "Welcome to the Ionic Super Starter",
   "TUTORIAL_SLIDE1_DESCRIPTION": "The <b>Ionic Super Starter</b> is a fully-featured Ionic starter with many pre-built pages and best practices.",
@@ -56,16 +56,16 @@
 
   "ITEM_NAME_PLACEHOLDER": "Name",
   "ITEM_ABOUT_PLACEHOLDER": "About",
-  "ITEM_TITLE_PLACEHOLDER": "Table Name",
-  "ITEM_DESCRIPTION_PLACEHOLDER": "Description",
-  "ITEM_TAG_PLACEHOLDER": "Tags",
+  "ITEM_TITLE_PLACEHOLDER": "테이블 이름",
+  "ITEM_DESCRIPTION_PLACEHOLDER": "설명",
+  "ITEM_TAGS_PLACEHOLDER": "태그",
 
   "DONE_BUTTON": "Done",
-  "CANCEL_BUTTON": "Cancel",
-  "DELETE_BUTTON": "Delete",
+  "CANCEL_BUTTON": "취소",
+  "DELETE_BUTTON": "삭제",
 
   "CARDS_TITLE": "Social",
 
-  "SEARCH_TITLE": "Search",
+  "SEARCH_TITLE": "검색",
   "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\""
 }

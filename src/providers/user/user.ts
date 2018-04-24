@@ -114,4 +114,18 @@ export class User {
       photoURL: _photoURL
     });
   }
+
+  getUserId() {
+    console.log('user-getUserId()a' );
+    var userId = this._user.uid;
+    console.log('userId [' + userId + ']' );
+    return userId;
+  }
+
+  getUserName() {
+    console.log('user-getUserName()a' );
+    var userName = this._user.displayName;
+    console.log('userName [' + userName + ']' );
+    return userName;
+  }
 }

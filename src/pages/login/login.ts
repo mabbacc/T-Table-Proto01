@@ -45,7 +45,6 @@ export class LoginPage {
     .then(
       (result) => {
         console.log("login-doLogin()-success [" + result + "]");
-        debugger;
         this.user.updateDisplayName( 'Test User-1045');
         this.navCtrl.push(MainPage);
         let toast = this.toastCtrl.create({

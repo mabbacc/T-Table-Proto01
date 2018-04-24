@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Item } from '../../models/item';
+import { User } from '../../providers/providers'; 
+import { Ttable } from '../../models/Ttable';
 import { Api } from '../api/api';
 
 import * as firebase from 'firebase';
@@ -8,44 +9,43 @@ import 'firebase/firestore';
 import { QuerySnapshot } from '@firebase/firestore-types';
 
 @Injectable()
-export class Items {
+export class Ttables {
 
-  items: Item[] = [];
+  ttables: Ttable[] = [];
 
+  /*
   defaultItem: any = {
     "name": "Burt Bear",
     "profilePic": "assets/img/speakers/bear.jpg",
     "about": "Burt is a Bear.",
   };
+  */
 
   db = firebase.firestore();
 
-  constructor(public api: Api) {
-    console.log("items-constructor()a");
+  constructor(public api: Api, public user: User) {
     this.db.collection('ttables').get()
     .then((querySnapshot) => {
-      console.log("items-cons-get().then()");
       querySnapshot.forEach((doc)=>{
-        this.items.push(doc);
+        this.ttables.push(doc);
       })
     });
 
     this.db.collection('ttables')
     .onSnapshot((collectionSnap) => {
-      console.log("items-onSnapshot()");
+      console.log('onSnapshot called()');
       collectionSnap.forEach((doc) => {
-        this.items.push(doc);
+        this.ttables.push(doc);
       })
     });
    }
 
-   /*
   query(params?: any) {
     if (!params) {
-      return this.items;
+      return this.ttables;
     }
 
-    return this.items.filter((item) => {
+    return this.ttables.filter((item) => {
       for (let key in params) {
         let field = item[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
@@ -57,23 +57,26 @@ export class Items {
       return null;
     });
   }
-  */
 
-  add(item: Item) {
-    /*
+  add(item: Ttable) {
+
     this.db.collection('ttables').add({
-      name: item.name,
-      profilePic: "assets/img/speakers/bear.jpg",
-      about: item.about
+      title: item.title,
+      description: "assets/img/speakers/bear.jpg",
+      images: [],
+      tags: [],
+      owner: this.user.getUserId(),
+      member: [],
+      status: "Ready",
+      createDate: ''
     }).then(function(docRef) {
       console.log("Document written with ID : [" + docRef.id + "]");
     }).catch(function(error) {
       console.log("Error adding ttable [" + error + "]");
     });
-    */
   }
 
-  delete(item: Item) {
+  delete(item: Ttable) {
   }
 
 }
